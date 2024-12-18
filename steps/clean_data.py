@@ -7,7 +7,7 @@ from src.data_cleaning import DataCleaning, DataDivideStrategy, DataPreProcessSt
 
 
 @step
-def clean_df(df: pd.DataFrame) -> Tuple[
+def clean_df(data: pd.DataFrame) -> Tuple[
     Annotated[pd.DataFrame, "x_train"],
     Annotated[pd.DataFrame, "x_test"],
     Annotated[pd.Series, "y_train"],
