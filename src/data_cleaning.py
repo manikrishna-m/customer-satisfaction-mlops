@@ -1,6 +1,7 @@
 import logging
 from abc import ABC, abstractmethod
 from typing import Union
+
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -8,7 +9,7 @@ from sklearn.model_selection import train_test_split
 
 class DataStrategy(ABC):
     """
-    Abstract class for defining strategy for handling data
+    Abstract Class defining strategy for handling data
     """
 
     @abstractmethod
@@ -16,7 +17,7 @@ class DataStrategy(ABC):
         pass
 
 
-class DataPreProcessStrategy(DataStrategy):
+class DataPreprocessStrategy(DataStrategy):
     """
     Data preprocessing strategy which preprocesses the data.
     """
@@ -94,8 +95,4 @@ class DataCleaning:
 
     def handle_data(self) -> Union[pd.DataFrame, pd.Series]:
         """Handle data based on the provided strategy"""
-        try:
-            return self.strategy.handle_data(self.df)
-        except Exception as e:
-            logging.error("Error  in handling data: {}".format(e))
-            raise e
+        return self.strategy.handle_data(self.df)

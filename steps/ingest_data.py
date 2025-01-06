@@ -1,43 +1,35 @@
 import logging
+
 import pandas as pd
 from zenml import step
 
 
 class IngestData:
     """
-    Ingesting the data from the data_path.
+    Data ingestion class which ingests data from the source and returns a DataFrame.
     """
 
-    def __init__(self, data_path):
-        """
-        Args:
-            data_path (str): The path to the data file.
-        """
-        self.data_path = data_path
+    def __init__(self) -> None:
+        """Initialize the data ingestion class."""
+        pass
 
-    def get_data(self):
-        """
-        Ingestig the data from the data_path
-        """
-        logging.info(f"Ingesting data from {self.data_path}")
-        return pd.read_csv(self.data_path)
+    def get_data(self) -> pd.DataFrame:
+        df = pd.read_csv("./data/olist_customers_dataset.csv")
+        return df
 
 
 @step
-def ingest_df(data_path: str) -> pd.DataFrame:
+def ingest_data() -> pd.DataFrame:
     """
-    Ingesting the data from the data_path.
-
     Args:
-        data_path (str): The path to the data file.
+        None
     Returns:
-        pd.DataFrame: The ingested data from the data_path
+        df: pd.DataFrame
     """
-
     try:
-        ingest_data = IngestData(data_path)
+        ingest_data = IngestData()
         df = ingest_data.get_data()
         return df
     except Exception as e:
-        logging.error(f"Failed to ingest data: {str(e)}")
+        logging.error(e)
         raise e
